@@ -23,7 +23,7 @@ class LogInPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(right: 10, left: 10),
+            padding: const EdgeInsets.only(right: 10, left: 10, top: 180),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -57,7 +57,11 @@ class LogInPage extends StatelessWidget {
                   url: 'https://www.svgrepo.com/show/475656/google-color.svg',
                   click: () async {
                     final user = await googleAuthentication.signInWithGoogle();
-                    print('email: ${user?.email}');
+                    if (user != null) {
+                      print('email: ${user.email}');
+                    } else {
+                      print('Sigin cancelled');
+                    }
                   },
                 ),
               ],

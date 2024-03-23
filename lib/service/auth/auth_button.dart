@@ -16,6 +16,7 @@ class LoginButton extends StatelessWidget {
     final screenSize = MediaQuery.sizeOf(context);
     return InkWell(
       onTap: click,
+      borderRadius: BorderRadius.circular(20),
       child: Container(
         height: screenSize.height * 0.06,
         width: screenSize.width * 0.6,

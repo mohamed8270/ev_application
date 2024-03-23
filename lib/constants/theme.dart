@@ -82,15 +82,15 @@ class ThemeClass {
   );
 
   static TextStyle loginHeading = GoogleFonts.poppins(
-    fontSize: 42,
-    fontWeight: FontWeight.w600,
+    fontSize: 44,
+    fontWeight: FontWeight.w700,
     color: ewhite,
   );
 
   static TextStyle loginParagraph = GoogleFonts.poppins(
-    fontSize: 12,
-    fontWeight: FontWeight.w600,
-    color: ewhite,
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
+    color: ewhite.withOpacity(0.4),
   );
 
   static SizedBox space0 = const SizedBox(height: 5);

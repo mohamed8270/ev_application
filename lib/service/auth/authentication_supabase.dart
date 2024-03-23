@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:ev_application/constants/theme.dart';
+import 'package:ev_application/database/supabase_data.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class GoogleAuthentication extends GetxController {
+  final supabaseHelper = Get.find<SupaBaseHelper>();
   final googleSignin = GoogleSignIn();
 
   Future<User?> signInWithGoogle() async {
