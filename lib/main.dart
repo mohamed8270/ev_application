@@ -5,12 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(GoogleAuthentication());
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL'].toString(),
+    anonKey: dotenv.env['SUPABASE_API'].toString(),
+  );
   Get.put(SupaBaseHelper());
+  Get.put(GoogleAuthentication());
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],

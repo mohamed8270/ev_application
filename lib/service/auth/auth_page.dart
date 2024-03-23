@@ -58,7 +58,7 @@ class LogInPage extends StatelessWidget {
                   click: () async {
                     final user = await googleAuthentication.signInWithGoogle();
                     if (user != null) {
-                      print('email: ${user.email}');
+                      print(user);
                     } else {
                       print('Sigin cancelled');
                     }
