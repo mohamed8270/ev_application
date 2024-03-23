@@ -81,6 +81,18 @@ class ThemeClass {
     color: eblack,
   );
 
+  static TextStyle loginHeading = GoogleFonts.poppins(
+    fontSize: 42,
+    fontWeight: FontWeight.w600,
+    color: ewhite,
+  );
+
+  static TextStyle loginParagraph = GoogleFonts.poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+    color: ewhite,
+  );
+
   static SizedBox space0 = const SizedBox(height: 5);
   static SizedBox space1 = const SizedBox(height: 10);
   static SizedBox space2 = const SizedBox(height: 20);
@@ -190,6 +202,32 @@ class ThemeClass {
           fontSize: 10,
           fontWeight: FontWeight.w600,
           color: eblack,
+        ),
+      ),
+    );
+  }
+
+  void googleSnack(e) {
+    Get.snackbar(
+      'Error',
+      'An unecpected error occured during sigin: $e',
+      snackPosition: SnackPosition.BOTTOM,
+      colorText: ewhite,
+      backgroundColor: ered,
+      titleText: Text(
+        'Error',
+        style: GoogleFonts.poppins(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: ewhite,
+        ),
+      ),
+      messageText: Text(
+        'An unecpected error occured during sigin: $e',
+        style: GoogleFonts.poppins(
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
+          color: ewhite,
         ),
       ),
     );
