@@ -36,7 +36,7 @@ class LogInPage extends StatelessWidget {
                       image: NetworkImage(
                         url,
                       ),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       filterQuality: FilterQuality.high,
                     ),
                   ),

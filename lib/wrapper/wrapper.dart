@@ -1,6 +1,7 @@
 import 'package:ev_application/constants/theme.dart';
 import 'package:ev_application/interface/admin_bottom_nav_bar.dart';
 import 'package:ev_application/interface/user_bottom_nav_bar.dart';
+import 'package:ev_application/service/auth/auth_page.dart';
 import 'package:ev_application/user_types/admin/pages/admin_home_page.dart';
 import 'package:ev_application/user_types/admin/pages/admin_post_detail_page.dart';
 import 'package:ev_application/user_types/admin/pages/admin_post_page.dart';
@@ -31,8 +32,9 @@ class Wrapper extends StatelessWidget {
         'adminprofilepage': (c) => const AdminProfilePage(),
         'adminpostpage': (c) => const AdminPostPage(),
         'adminpostdetailpage': (c) => AdminPostDetailPage(),
+        'loginpage': (c) => LogInPage(),
       },
-      home: const AdminBottomNavBar(),
+      home: LogInPage(),
     );
   }
 }

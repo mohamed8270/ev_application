@@ -20,7 +20,7 @@ class LoginButton extends StatelessWidget {
         height: screenSize.height * 0.06,
         width: screenSize.width * 0.6,
         decoration: BoxDecoration(
-          color: egrey.withOpacity(0.3),
+          color: egrey.withOpacity(0.05),
           borderRadius: BorderRadius.circular(20),
         ),
         alignment: Alignment.center,
@@ -37,7 +37,7 @@ class LoginButton extends StatelessWidget {
               Text(
                 txt,
                 style: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: ewhite,
                 ),
