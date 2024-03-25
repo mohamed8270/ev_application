@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print
 
 import 'package:ev_application/constants/theme.dart';
-import 'package:ev_application/service/auth/auth_button.dart';
-import 'package:ev_application/service/auth/authentication_supabase.dart';
+import 'package:ev_application/service/auth/front_end/auth_button.dart';
+import 'package:ev_application/service/auth/auth_service/authentication_supabase.dart';
+import 'package:ev_application/service/auth/front_end/user_type_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +24,7 @@ class LogInPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(right: 10, left: 10, top: 180),
+            padding: const EdgeInsets.only(right: 10, left: 10, top: 160),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,6 +52,8 @@ class LogInPage extends StatelessWidget {
                   'A first ever application for EV car holders and Stations holders',
                   style: ThemeClass.loginParagraph,
                 ),
+                ThemeClass.space1,
+                const UserTypeButton(),
                 ThemeClass.space1,
                 LoginButton(
                   txt: 'Continue with Google',

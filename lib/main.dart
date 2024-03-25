@@ -1,5 +1,5 @@
 import 'package:ev_application/database/supabase_data.dart';
-import 'package:ev_application/service/auth/authentication_supabase.dart';
+import 'package:ev_application/service/auth/auth_service/authentication_supabase.dart';
 import 'package:ev_application/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
