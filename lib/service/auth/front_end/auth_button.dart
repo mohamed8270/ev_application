@@ -4,8 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginButton extends StatelessWidget {
-  const LoginButton(
-      {super.key, required this.txt, required this.url, required this.click});
+  const LoginButton({
+    super.key,
+    required this.txt,
+    required this.url,
+    required this.click,
+  });
 
   final String txt;
   final String url;

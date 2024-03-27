@@ -3,12 +3,17 @@
 import 'package:ev_application/constants/theme.dart';
 import 'package:ev_application/interface/app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserHomePage extends StatelessWidget {
-  const UserHomePage({super.key});
+  UserHomePage({super.key});
+
+  final supabase = Supabase.instance.client;
 
   @override
   Widget build(BuildContext context) {
+    final user = supabase.auth.currentUser;
+    final userName = user!.userMetadata?['full_name'];
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -27,7 +32,7 @@ class UserHomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Greetings',
+                'Greetings, $userName',
                 style: ThemeClass.heading1,
               ),
               ThemeClass.space0,

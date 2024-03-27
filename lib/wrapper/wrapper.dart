@@ -24,7 +24,7 @@ class Wrapper extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        'userhomepage': (c) => const UserHomePage(),
+        'userhomepage': (c) => UserHomePage(),
         'userprofilepage': (c) => const UserProfilePage(),
         'userbottomnavbar': (c) => const UserBottomNavBar(),
         'adminbottomnavabar': (c) => const AdminBottomNavBar(),
@@ -32,9 +32,9 @@ class Wrapper extends StatelessWidget {
         'adminprofilepage': (c) => const AdminProfilePage(),
         'adminpostpage': (c) => const AdminPostPage(),
         'adminpostdetailpage': (c) => AdminPostDetailPage(),
-        'loginpage': (c) => LogInPage(),
+        'loginpage': (c) => const LogInPage(),
       },
-      home: LogInPage(),
+      home: const LogInPage(),
     );
   }
 }

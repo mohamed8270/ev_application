@@ -17,7 +17,7 @@ class _UserBottomNavBarState extends State<UserBottomNavBar> {
   int currentIndex = 0;
 
   final screens = [
-    const UserHomePage(),
+    UserHomePage(),
     const UserProfilePage(),
   ];
   @override
