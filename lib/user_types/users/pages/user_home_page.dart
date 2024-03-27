@@ -14,6 +14,8 @@ class UserHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = supabase.auth.currentUser;
     final userName = user!.userMetadata?['full_name'];
+    // final profileImageUrl = user.userMetadata?['avatar_url'];
+    // final profileMail = user.userMetadata?['email'];
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -38,7 +40,7 @@ class UserHomePage extends StatelessWidget {
               ThemeClass.space0,
               Text(
                 'Reach the electric station at time without any rush',
-                style: ThemeClass.heading5,
+                style: ThemeClass.heading10,
               ),
               ThemeClass.space2,
             ],

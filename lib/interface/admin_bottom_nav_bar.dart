@@ -17,7 +17,7 @@ class _AdminBottomNavBarState extends State<AdminBottomNavBar> {
   int currentIndex = 0;
 
   final screens = [
-    const AdminHomePage(),
+    AdminHomePage(),
     const AdminProfilePage(),
   ];
   @override

@@ -6,13 +6,18 @@ import 'package:ev_application/user_types/admin/components/admin_post_button.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminHomePage extends StatelessWidget {
-  const AdminHomePage({super.key});
-
+  AdminHomePage({super.key});
+  final supabase = Supabase.instance.client;
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
+    final user = supabase.auth.currentUser;
+    final userName = user!.userMetadata?['full_name'];
+    // final profileImageUrl = user.userMetadata?['avatar_url'];
+    // final profileMail = user.userMetadata?['email'];
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -56,7 +61,7 @@ class AdminHomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Greetings, Mohamed',
+                'Greetings, $userName',
                 style: ThemeClass.heading11,
               ),
               ThemeClass.space0,

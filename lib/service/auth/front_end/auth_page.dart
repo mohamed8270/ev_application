@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:ev_application/constants/theme.dart';
+import 'package:ev_application/service/auth/auth_service/auth_router.dart';
 import 'package:ev_application/service/auth/front_end/auth_button.dart';
 import 'package:ev_application/service/auth/auth_service/authentication_supabase.dart';
 import 'package:ev_application/service/auth/front_end/user_type_button.dart';
@@ -38,10 +39,12 @@ class _LogInPageState extends State<LogInPage> {
     });
   }
 
-  Future<void> userMetaData(User user, String userType) async {
+  Future<void> userMetaData(
+      User user, String userType, String authUserId) async {
     try {
-      await supabaseClient.from('users').update({
-        'raw_user_meta_data': {"user_type": userType}
+      await supabaseClient.from('users').insert({
+        'raw_user_meta_data': userType,
+        'auth_user_id': authUserId,
       }).eq('id', user.id.toString());
     } catch (e) {
       print('Front-end userMetaData');
@@ -111,8 +114,12 @@ class _LogInPageState extends State<LogInPage> {
                         await googleAuthentication.signInWithGoogle();
                     if (authResponse!.session != null) {
                       final user = authResponse.user;
-                      await userMetaData(user!, userType_);
-                      print(user);
+                      await userMetaData(user!, userType_, user.id);
+                      Get.to(AuthRouter(
+                        user: user,
+                        authuserid: user.id,
+                      ));
+                      // print(user);
                     } else {
                       print('Sigin cancelled');
                     }
