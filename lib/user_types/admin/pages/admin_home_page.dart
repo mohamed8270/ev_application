@@ -13,16 +13,17 @@ class AdminHomePage extends StatelessWidget {
   final supabase = Supabase.instance.client;
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.sizeOf(context);
+    // final screenSize = MediaQuery.sizeOf(context);
     final user = supabase.auth.currentUser;
     final userName = user!.userMetadata?['full_name'];
-    // final profileImageUrl = user.userMetadata?['avatar_url'];
+    final profileImageUrl = user.userMetadata?['avatar_url'];
     // final profileMail = user.userMetadata?['email'];
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBarWidget(
           leading: 'https://www.svgrepo.com/show/491107/power.svg',
+          click: () {},
           title: "Caroxi",
           actions: [
             Padding(
@@ -42,15 +43,19 @@ class AdminHomePage extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: egrey.withOpacity(0.4),
                 radius: 18,
-                child: SvgPicture.network(
-                  'https://www.svgrepo.com/show/422291/profile-user.svg',
-                  height: 20,
-                  width: 20,
+                child: ClipOval(
+                  child: Image.network(
+                    profileImageUrl == null
+                        ? 'https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg'
+                        : profileImageUrl.toString(),
+                    height: 34,
+                    width: 34,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
           ],
-          click: () {},
         ),
       ),
       body: SingleChildScrollView(

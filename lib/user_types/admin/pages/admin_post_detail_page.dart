@@ -39,9 +39,9 @@ class AdminPostDetailPage extends StatelessWidget {
         preferredSize: const Size.fromHeight(50),
         child: AppBarWidget(
           leading: 'https://www.svgrepo.com/show/502557/charging-battery.svg',
+          click: () {},
           title: 'Charging Stations',
           actions: const [],
-          click: () {},
         ),
       ),
       body: Obx(
@@ -58,6 +58,8 @@ class AdminPostDetailPage extends StatelessWidget {
               costperkwh: station['cost_per_kwh'].toString(),
               timebased: station['time_based_pricing'].toString(),
               membership: checkMembership(station['membership']),
+              click: () {},
+              longClick: () => supaBaseHelper.deleteStationData(station['id']),
             );
           },
         ),

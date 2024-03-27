@@ -5,6 +5,7 @@ import 'package:ev_application/user_types/users/pages/user_home_page.dart';
 import 'package:ev_application/user_types/users/pages/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserBottomNavBar extends StatefulWidget {
   const UserBottomNavBar({super.key});
@@ -39,21 +40,21 @@ class _UserBottomNavBarState extends State<UserBottomNavBar> {
           elevation: 0,
           iconSize: 18,
           currentIndex: currentIndex,
-          selectedLabelStyle: const TextStyle(
+          selectedLabelStyle: GoogleFonts.poppins(
             color: egreen,
-            fontSize: 12,
+            fontSize: 9,
             fontWeight: FontWeight.w600,
-            height: 1.5,
+            height: 2,
           ),
           showSelectedLabels: true,
           showUnselectedLabels: true,
           unselectedItemColor: eblack.withOpacity(0.3),
           selectedItemColor: egreen,
-          unselectedLabelStyle: TextStyle(
+          unselectedLabelStyle: GoogleFonts.poppins(
             color: eblack.withOpacity(0.3),
-            fontSize: 12,
+            fontSize: 9,
             fontWeight: FontWeight.w600,
-            height: 1.5,
+            height: 2,
           ),
           onTap: (index) => setState(() => currentIndex = index),
           items: [
