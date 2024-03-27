@@ -1,6 +1,7 @@
 import 'package:ev_application/constants/theme.dart';
 import 'package:ev_application/database/supabase_data.dart';
 import 'package:ev_application/user_types/admin/components/admin_post_detail_repo.dart';
+import 'package:ev_application/user_types/users/pages/user_post_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +48,11 @@ class UserStationDetails extends StatelessWidget {
             costperkwh: station['cost_per_kwh'].toString(),
             timebased: station['time_based_pricing'].toString(),
             membership: checkMembership(station['membership']),
-            click: () {},
+            click: () => Get.to(
+              UserSidePostDetailPage(
+                index: index,
+              ),
+            ),
             longClick: () {},
           );
         },
