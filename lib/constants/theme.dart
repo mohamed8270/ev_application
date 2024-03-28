@@ -81,6 +81,12 @@ class ThemeClass {
     color: eblack,
   );
 
+  static TextStyle heading13 = GoogleFonts.poppins(
+    fontSize: 8,
+    fontWeight: FontWeight.w600,
+    color: ewhite,
+  );
+
   static TextStyle loginHeading = GoogleFonts.poppins(
     fontSize: 44,
     fontWeight: FontWeight.w700,

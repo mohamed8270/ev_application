@@ -32,11 +32,11 @@ class _AuthRouterState extends State<AuthRouter> {
       final userData_ = await supabaseClient
           .from('users')
           .select()
-          .eq('auth_user_id', widget.authuserid)
-          .single();
+          .eq('auth_user_id', widget.authuserid);
+
       print('userdata: $userData_');
       setState(() {
-        userData = userData_;
+        userData = userData_.first;
       });
     } catch (e) {
       print(e);

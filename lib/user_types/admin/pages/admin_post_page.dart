@@ -36,6 +36,8 @@ class _AdminPostPageState extends State<AdminPostPage> {
   var timekwhController = TextEditingController();
   var memberController = TextEditingController();
   var locationlinkController = TextEditingController();
+  var latitudeController = TextEditingController();
+  var longitudeController = TextEditingController();
   String availabilityOption = 'Open';
   String memberOption = 'Yes';
   String kWh = '';
@@ -62,6 +64,8 @@ class _AdminPostPageState extends State<AdminPostPage> {
         'membership': memberController.text,
         'description': descriptioController.text,
         'location_link': locationlinkController.text,
+        'latitude': latitudeController.text,
+        'longitude': longitudeController.text,
       };
       await supaBaseHelper.insertStationData(data);
       setState(() {
@@ -237,10 +241,14 @@ class _AdminPostPageState extends State<AdminPostPage> {
                   if (position != null) {
                     double latitude = position.latitude;
                     double longitude = position.longitude;
+                    String latitudeData = latitude.toString();
+                    String longitudeData = longitude.toString();
                     String mapUrl =
-                        "https://www.openstreetmap.org/?lon=$longitude&lat=$latitude&zoom=14";
+                        "https://www.openstreetmap.org/?lon=$longitude&lat=$latitude&zoom=19";
                     setState(() {
                       locationlinkController.text = mapUrl;
+                      latitudeController.text = latitudeData;
+                      longitudeController.text = longitudeData;
                     });
                   }
                 },
