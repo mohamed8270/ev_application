@@ -29,7 +29,7 @@ class Wrapper extends StatelessWidget {
         'userbottomnavbar': (c) => const UserBottomNavBar(),
         'adminbottomnavabar': (c) => const AdminBottomNavBar(),
         'adminhomepage': (c) => AdminHomePage(),
-        'adminprofilepage': (c) => const AdminProfilePage(),
+        'adminprofilepage': (c) => AdminProfilePage(),
         'adminpostpage': (c) => const AdminPostPage(),
         'adminpostdetailpage': (c) => AdminPostDetailPage(),
         'loginpage': (c) => const LogInPage(),

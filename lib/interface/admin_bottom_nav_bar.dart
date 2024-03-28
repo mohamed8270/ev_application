@@ -19,7 +19,7 @@ class _AdminBottomNavBarState extends State<AdminBottomNavBar> {
 
   final screens = [
     AdminHomePage(),
-    const AdminProfilePage(),
+    AdminProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
