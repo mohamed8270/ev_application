@@ -1,12 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:ev_application/constants/theme.dart';
 import 'package:ev_application/database/supabase_data.dart';
 import 'package:ev_application/interface/app_bar.dart';
 import 'package:ev_application/interface/user_bottom_nav_bar.dart';
 import 'package:ev_application/interface/user_input.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:ev_application/service/geo_location.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class UserChargeRequestPage extends StatefulWidget {
@@ -18,6 +20,7 @@ class UserChargeRequestPage extends StatefulWidget {
 
 class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
   SupaBaseHelper supaBaseHelper = Get.put(SupaBaseHelper());
+  GeoLocationService geoLocationService = Get.put(GeoLocationService());
   var usernameController = TextEditingController();
   var usercontactController = TextEditingController();
   var vehiclenameController = TextEditingController();
@@ -27,6 +30,10 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
   var locationController = TextEditingController();
   var emergencyController = TextEditingController();
   var issueController = TextEditingController();
+  var latitudeController = TextEditingController();
+  var longitudeController = TextEditingController();
+  String emergency = 'Emergency';
+  String noemergency = 'At Time';
   bool isLoading = false;
   bool status = false;
 
@@ -45,6 +52,8 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
         'location': locationController.text,
         'emergency': emergencyController.text,
         'issue': issueController.text,
+        'latitude': latitudeController.text,
+        'longitude': longitudeController.text,
       };
       await supaBaseHelper.insertRequestData(data);
       setState(() {
@@ -156,7 +165,23 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      Position? position =
+                          await geoLocationService.getLocation();
+                      if (position != null) {
+                        double latitude = position.latitude;
+                        double longitude = position.longitude;
+                        String latitudeData = latitude.toString();
+                        String longitudeData = longitude.toString();
+                        String mapUrl =
+                            "https://www.openstreetmap.org/?lon=$longitude&lat=$latitude&zoom=19";
+                        setState(() {
+                          locationController.text = mapUrl;
+                          latitudeController.text = latitudeData;
+                          longitudeController.text = longitudeData;
+                        });
+                      }
+                    },
                     child: AbsorbPointer(
                       child: UserInputWidget(
                         height: screenSize.height * 0.055,
@@ -181,6 +206,8 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                         value: status,
                         height: screenSize.height * 0.055,
                         width: screenSize.width * 0.15,
+                        activeColor: ered,
+                        inactiveColor: egreen.withOpacity(0.4),
                         borderRadius: 30,
                         padding: 8,
                         toggleSize: 45,
@@ -190,6 +217,14 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                           setState(() {
                             status = value;
                           });
+                          print(status);
+                          if (status == true) {
+                            setState(() {
+                              emergencyController.text = emergency;
+                            });
+                          } else if (status == false) {
+                            emergencyController.text = noemergency;
+                          }
                         },
                       ),
                     ],
