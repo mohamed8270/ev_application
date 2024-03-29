@@ -5,6 +5,7 @@ import 'package:ev_application/database/supabase_data.dart';
 import 'package:ev_application/interface/app_bar.dart';
 import 'package:ev_application/service/geo_location.dart';
 import 'package:ev_application/user_types/users/components/user_station_avail_repo.dart';
+import 'package:ev_application/user_types/users/pages/user_request/user_request_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
@@ -98,7 +99,7 @@ class UserSidePostDetailPage extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () => Get.to(const UserChargeRequestPage()),
               child: Container(
                 height: screenSize.height,
                 width: screenSize.width * 0.5,

@@ -8,9 +8,11 @@ import 'package:ev_application/interface/user_input.dart';
 import 'package:ev_application/service/geo_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:gap/gap.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class UserChargeRequestPage extends StatefulWidget {
   const UserChargeRequestPage({super.key});
@@ -37,6 +39,40 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
   String noemergency = 'At Time';
   bool isLoading = false;
   bool status = false;
+
+  TimeOfDay initialTime = TimeOfDay.now();
+  void timeFetch() async {
+    final TimeOfDay? newTime = await showTimePicker(
+      context: context,
+      initialTime: initialTime,
+    );
+    if (newTime != null) {
+      setState(() {
+        initialTime = newTime;
+        print(initialTime);
+        timeController.text = initialTime.format(context);
+        print(timeController.text);
+      });
+    }
+  }
+
+  DateTime? selectedFromDate;
+
+  // Select Date Function
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedFromDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedFromDate) {
+      setState(() {
+        selectedFromDate = picked;
+        dateController.text = DateFormat('yyyy-MM-dd').format(picked);
+      });
+    }
+  }
 
   Future<void> insertUserRequestData() async {
     try {
@@ -88,14 +124,25 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
           width: screenSize.width,
           decoration: const BoxDecoration(color: egreen),
           alignment: Alignment.center,
-          child: Text(
-            'Request Port',
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: ewhite,
-            ),
-          ),
+          child: isLoading
+              ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    color: ewhite,
+                    strokeWidth: 2.5,
+                    strokeCap: StrokeCap.round,
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                  ),
+                )
+              : Text(
+                  'Request Port',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: ewhite,
+                  ),
+                ),
         ),
       ),
       body: SingleChildScrollView(
@@ -123,11 +170,16 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
               UserInputWidget(
                 height: screenSize.height * 0.055,
                 width: screenSize.width * 0.95,
-                icnLink: 'https://www.svgrepo.com/show/473980/profile.svg',
+                icnLink: 'https://www.svgrepo.com/show/533284/phone-alt.svg',
                 txt: 'Phone',
                 type: TextInputType.number,
                 userController: usercontactController,
                 mode: false,
+              ),
+              ThemeClass.space2,
+              Text(
+                'Vehicle Details',
+                style: ThemeClass.heading3,
               ),
               ThemeClass.space1,
               Row(
@@ -154,29 +206,44 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                   ),
                 ],
               ),
+              ThemeClass.space2,
+              Text(
+                'Service Details',
+                style: ThemeClass.heading3,
+              ),
               ThemeClass.space1,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  UserInputWidget(
-                    height: screenSize.height * 0.055,
-                    width: screenSize.width * 0.45,
-                    icnLink:
-                        'https://www.svgrepo.com/show/408361/event-calender-date-note.svg',
-                    txt: 'Date',
-                    type: TextInputType.text,
-                    userController: dateController,
-                    mode: false,
+                  GestureDetector(
+                    onTap: () => selectDate(context),
+                    child: AbsorbPointer(
+                      child: UserInputWidget(
+                        height: screenSize.height * 0.055,
+                        width: screenSize.width * 0.45,
+                        icnLink:
+                            'https://www.svgrepo.com/show/408361/event-calender-date-note.svg',
+                        txt: 'Date',
+                        type: TextInputType.text,
+                        userController: dateController,
+                        mode: true,
+                      ),
+                    ),
                   ),
-                  UserInputWidget(
-                    height: screenSize.height * 0.055,
-                    width: screenSize.width * 0.45,
-                    icnLink:
-                        'https://www.svgrepo.com/show/490412/time-oclock.svg',
-                    txt: 'Time',
-                    type: TextInputType.text,
-                    userController: timeController,
-                    mode: false,
+                  GestureDetector(
+                    onTap: () => timeFetch(),
+                    child: AbsorbPointer(
+                      child: UserInputWidget(
+                        height: screenSize.height * 0.055,
+                        width: screenSize.width * 0.45,
+                        icnLink:
+                            'https://www.svgrepo.com/show/490412/time-oclock.svg',
+                        txt: 'Time',
+                        type: TextInputType.text,
+                        userController: timeController,
+                        mode: true,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -205,7 +272,7 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                     child: AbsorbPointer(
                       child: UserInputWidget(
                         height: screenSize.height * 0.055,
-                        width: screenSize.width * 0.45,
+                        width: screenSize.width * 0.7,
                         icnLink:
                             'https://www.svgrepo.com/show/532540/location-pin-alt-1.svg',
                         txt: 'Location',
@@ -222,17 +289,18 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                         'Emergency',
                         style: ThemeClass.emergencyText,
                       ),
+                      ThemeClass.space0,
                       FlutterSwitch(
                         value: status,
-                        height: screenSize.height * 0.055,
-                        width: screenSize.width * 0.15,
-                        activeColor: ered,
-                        inactiveColor: egreen.withOpacity(0.4),
+                        height: screenSize.height * 0.04,
+                        width: screenSize.width * 0.2,
+                        activeColor: egreen.withOpacity(0.4),
+                        inactiveColor: egrey,
                         borderRadius: 30,
                         padding: 8,
-                        toggleSize: 45,
-                        showOnOff: true,
-                        valueFontSize: 25,
+                        toggleSize: 20,
+                        showOnOff: false,
+                        valueFontSize: 10,
                         onToggle: (value) {
                           setState(() {
                             status = value;
@@ -241,9 +309,11 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                           if (status == true) {
                             setState(() {
                               emergencyController.text = emergency;
+                              print(emergencyController.text);
                             });
                           } else if (status == false) {
                             emergencyController.text = noemergency;
+                            print(emergencyController.text);
                           }
                         },
                       ),
@@ -253,7 +323,7 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
               ),
               ThemeClass.space1,
               UserInputWidget(
-                height: screenSize.height * 0.055,
+                height: screenSize.height * 0.09,
                 width: screenSize.width * 0.95,
                 icnLink: 'https://www.svgrepo.com/show/497002/data-2.svg',
                 txt: 'Query or Issue',
@@ -261,6 +331,7 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
                 userController: issueController,
                 mode: false,
               ),
+              const Gap(80),
             ],
           ),
         ),
