@@ -10,12 +10,14 @@ class SupaBaseHelper extends GetxController {
   final supabaseAPI = dotenv.env['SUPABASE_API'].toString();
   late final SupabaseClient supabase;
   final stations = <Map<String, dynamic>>[].obs;
+  final requestData = <Map<String, dynamic>>[].obs;
 
   @override
   void onInit() {
     super.onInit();
     initializeSupaBase();
     fetchStationData();
+    fetchRequestData();
   }
 
   void initializeSupaBase() {
@@ -80,7 +82,7 @@ class SupaBaseHelper extends GetxController {
     try {
       final response = await supabase.from('user_charge_request').select();
       if (response.isNotEmpty) {
-        stations.value = response;
+        requestData.value = response;
       } else {
         ThemeClass().warningSnack();
       }
