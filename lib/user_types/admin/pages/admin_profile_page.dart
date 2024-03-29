@@ -1,5 +1,8 @@
 import 'package:ev_application/constants/theme.dart';
+import 'package:ev_application/interface/custom_button.dart';
+import 'package:ev_application/service/auth/front_end/auth_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminProfilePage extends StatelessWidget {
@@ -8,7 +11,7 @@ class AdminProfilePage extends StatelessWidget {
   final supabase = Supabase.instance.client;
   @override
   Widget build(BuildContext context) {
-    // final screenSize = MediaQuery.sizeOf(context);
+    final screenSize = MediaQuery.sizeOf(context);
     final user = supabase.auth.currentUser;
     final profileimage = user?.userMetadata?['avatar_url'];
     final fullname = user?.userMetadata?['full_name'];
@@ -59,6 +62,21 @@ class AdminProfilePage extends StatelessWidget {
               style: ThemeClass.heading5,
             ),
             ThemeClass.space2,
+            CustomButtonWidget(
+              height: screenSize.height * 0.04,
+              width: screenSize.width * 0.1,
+              radius: 10,
+              color: egreen,
+              txt: 'Signout',
+              click: () async {
+                await supabase.auth.signOut();
+                if (context.mounted) {
+                  Get.to(const LogInPage());
+                }
+              },
+              txtsize: 12,
+              txtcolor: ewhite,
+            ),
           ],
         ),
       ),
