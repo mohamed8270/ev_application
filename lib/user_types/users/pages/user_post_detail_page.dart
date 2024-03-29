@@ -99,7 +99,10 @@ class UserSidePostDetailPage extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () => Get.to(const UserChargeRequestPage()),
+              onTap: () => Get.to(UserChargeRequestPage(
+                id: data['id'].toString(),
+                stationName: data['station_name'].toString(),
+              )),
               child: Container(
                 height: screenSize.height,
                 width: screenSize.width * 0.5,

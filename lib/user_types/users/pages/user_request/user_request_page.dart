@@ -15,7 +15,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class UserChargeRequestPage extends StatefulWidget {
-  const UserChargeRequestPage({super.key});
+  final String id;
+  final String stationName;
+  const UserChargeRequestPage(
+      {super.key, required this.id, required this.stationName});
 
   @override
   State<UserChargeRequestPage> createState() => _UserChargeRequestPageState();
@@ -91,6 +94,8 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
         'issue': issueController.text,
         'latitude': latitudeController.text,
         'longitude': longitudeController.text,
+        '_id': widget.id,
+        'stationname': widget.stationName,
       };
       await supaBaseHelper.insertRequestData(data);
       setState(() {

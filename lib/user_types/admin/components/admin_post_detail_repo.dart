@@ -15,8 +15,10 @@ class AdminPostDetailRepo extends StatelessWidget {
     required this.membership,
     required this.click,
     required this.longClick,
+    required this.id,
   });
 
+  final String id;
   final String station;
   final String location;
   final Color availability;
@@ -61,6 +63,10 @@ class AdminPostDetailRepo extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          id,
+                          style: ThemeClass.connectorParapraph,
+                        ),
                         Text(
                           station,
                           style: ThemeClass.heading2,

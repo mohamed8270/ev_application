@@ -40,6 +40,7 @@ class UserStationDetails extends StatelessWidget {
         itemBuilder: (context, index) {
           final station = supaBaseHelper.stations[index];
           return AdminPostDetailRepo(
+            id: 'ID: ${station['id'].toString()}',
             station: station['station_name'].toString(),
             location: station['location'].toString(),
             availability: checkAvailability(station['availability']),

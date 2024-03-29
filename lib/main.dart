@@ -17,13 +17,12 @@ Future<void> main() async {
   Get.put(SupaBaseHelper());
   Get.put(GoogleAuthentication());
   SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.immersive,
+    SystemUiMode.manual,
     overlays: [SystemUiOverlay.top],
   );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.transparent,
     ),
   );
   runApp(const MyApp());
