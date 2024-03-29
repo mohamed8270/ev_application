@@ -99,6 +99,24 @@ class ThemeClass {
     color: ewhite.withOpacity(0.4),
   );
 
+  static TextStyle contactPragraph = GoogleFonts.poppins(
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    color: eblack,
+  );
+
+  static TextStyle connectorParapraph = GoogleFonts.poppins(
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    color: egreen,
+  );
+
+  static TextStyle priceParapraph = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    color: eblack,
+  );
+
   static SizedBox space0 = const SizedBox(height: 5);
   static SizedBox space1 = const SizedBox(height: 10);
   static SizedBox space2 = const SizedBox(height: 20);

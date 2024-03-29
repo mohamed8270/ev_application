@@ -8,6 +8,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -69,6 +70,51 @@ class UserSidePostDetailPage extends StatelessWidget {
           actions: const [],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButton: Container(
+        height: screenSize.height * 0.08,
+        decoration: const BoxDecoration(color: Colors.transparent),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Cost per KWh',
+                    style: ThemeClass.heading12,
+                  ),
+                  Text(
+                    '₹${data['cost_per_kwh'].toString()}',
+                    style: ThemeClass.heading1,
+                  ),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                height: screenSize.height,
+                width: screenSize.width * 0.5,
+                decoration: const BoxDecoration(color: egreen),
+                alignment: Alignment.center,
+                child: Text(
+                  'Charge',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: ewhite,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -84,8 +130,8 @@ class UserSidePostDetailPage extends StatelessWidget {
                     options: MapOptions(
                       keepAlive: true,
                       initialCenter: LatLng(
-                        data['latitude'],
-                        data['longitude'],
+                        double.parse(data['latitude']),
+                        double.parse(data['longitude']),
                       ),
                       initialZoom: 10,
                     ),
@@ -98,7 +144,8 @@ class UserSidePostDetailPage extends StatelessWidget {
                       MarkerLayer(
                         markers: [
                           Marker(
-                            point: LatLng(data['latitude'], data['longitude']),
+                            point: LatLng(double.parse(data['latitude']),
+                                double.parse(data['longitude'])),
                             child: SvgPicture.network(
                               'https://www.svgrepo.com/show/474059/location.svg',
                               height: 25,
@@ -124,9 +171,13 @@ class UserSidePostDetailPage extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          data['station_name'].toString(),
-                          style: ThemeClass.heading11,
+                        SizedBox(
+                          width: screenSize.width * 0.65,
+                          child: Text(
+                            data['station_name'].toString(),
+                            overflow: TextOverflow.ellipsis,
+                            style: ThemeClass.heading11,
+                          ),
                         ),
                         Text(
                           data['address'].toString(),
@@ -138,9 +189,9 @@ class UserSidePostDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text(
-                      data['cost_per_kwh'].toString(),
-                      style: ThemeClass.heading1,
+                    CheckUserAvailRepo(
+                      txt: '₹${data['time_based_pricing'].toString()} / hr',
+                      color: eblack.withOpacity(0.4),
                     ),
                   ],
                 ),
@@ -154,13 +205,8 @@ class UserSidePostDetailPage extends StatelessWidget {
                     ),
                     ThemeClass.space4,
                     CheckUserAvailRepo(
-                      txt: data['membership'].toString(),
+                      txt: 'Membership: ${data['membership'].toString()}',
                       color: checkMembership(data['membership']),
-                    ),
-                    ThemeClass.space4,
-                    CheckUserAvailRepo(
-                      txt: '₹${data['time_based_pricing'].toString()} / hr',
-                      color: eblack,
                     ),
                   ],
                 ),
@@ -170,13 +216,13 @@ class UserSidePostDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      data['type'].toString(),
-                      style: ThemeClass.heading10,
+                      '${data['type'].toString()},',
+                      style: ThemeClass.connectorParapraph,
                     ),
                     ThemeClass.space4,
                     Text(
                       data['connector'].toString(),
-                      style: ThemeClass.heading10,
+                      style: ThemeClass.connectorParapraph,
                     ),
                   ],
                 ),
@@ -184,6 +230,11 @@ class UserSidePostDetailPage extends StatelessWidget {
                 Text(
                   data['description'].toString(),
                   style: ThemeClass.heading4,
+                ),
+                ThemeClass.space2,
+                Text(
+                  'Contact Details',
+                  style: ThemeClass.contactPragraph,
                 ),
                 ThemeClass.space0,
                 Row(
@@ -194,7 +245,7 @@ class UserSidePostDetailPage extends StatelessWidget {
                       data['email'].toString(),
                       style: ThemeClass.heading10,
                     ),
-                    ThemeClass.space4,
+                    ThemeClass.space5,
                     Text(
                       data['phone'].toString(),
                       style: ThemeClass.heading10,

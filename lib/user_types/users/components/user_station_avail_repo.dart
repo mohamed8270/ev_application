@@ -14,14 +14,14 @@ class CheckUserAvailRepo extends StatelessWidget {
       fit: BoxFit.fitWidth,
       child: Container(
         height: screenSize.height * 0.04,
-        // width: screenSize.width,
+        // width: screenSize.width * 0.15,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(6),
         ),
         alignment: Alignment.center,
         child: Padding(
-          padding: const EdgeInsets.all(4),
+          padding: const EdgeInsets.all(5),
           child: Text(
             txt,
             style: ThemeClass.heading13,
