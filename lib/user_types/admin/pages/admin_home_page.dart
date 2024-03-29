@@ -4,6 +4,7 @@ import 'package:ev_application/constants/theme.dart';
 import 'package:ev_application/database/supabase_data.dart';
 import 'package:ev_application/interface/app_bar.dart';
 import 'package:ev_application/user_types/admin/components/admin_post_button.dart';
+import 'package:ev_application/user_types/admin/components/geo_location_web_view/location_web_view.dart';
 import 'package:ev_application/user_types/admin/components/user_request_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -100,7 +101,8 @@ class AdminHomePage extends StatelessWidget {
                       time: requestdata['time'].toString(),
                       emergency: requestdata['emergency'].toString(),
                       contact: requestdata['contact'].toString(),
-                      locationClick: () {},
+                      locationClick: () =>
+                          Get.to(UserRequestMapView(index: idx)),
                     );
                   },
                 ),
