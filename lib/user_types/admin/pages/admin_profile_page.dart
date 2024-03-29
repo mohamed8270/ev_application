@@ -16,9 +16,9 @@ class AdminProfilePage extends StatelessWidget {
     final profileimage = user?.userMetadata?['avatar_url'];
     final fullname = user?.userMetadata?['full_name'];
     final email = user?.userMetadata?['email'];
-    final createdat = user?.userMetadata?['created_at'];
-    final updatedat = user?.userMetadata?['updated_at'];
-    final confirmedat = user?.userMetadata?['confirmed_at'];
+    final createdat = user?.createdAt;
+    final updatedat = user?.updatedAt;
+    final confirmedat = user?.emailConfirmedAt;
     return Scaffold(
       body: Center(
         child: Column(
@@ -48,17 +48,17 @@ class AdminProfilePage extends StatelessWidget {
             ),
             ThemeClass.space1,
             Text(
-              createdat,
+              'Created: ${createdat.toString()}',
               style: ThemeClass.heading5,
             ),
             ThemeClass.space1,
             Text(
-              updatedat,
+              'Updated: ${updatedat.toString()}',
               style: ThemeClass.heading5,
             ),
             ThemeClass.space1,
             Text(
-              confirmedat,
+              'Confirmed: ${confirmedat.toString()}',
               style: ThemeClass.heading5,
             ),
             ThemeClass.space2,
