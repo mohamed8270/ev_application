@@ -18,7 +18,7 @@ Future<void> main() async {
   Get.put(GoogleAuthentication());
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.immersiveSticky,
-    // overlays: [SystemUiOverlay.top],
+    overlays: [SystemUiOverlay.top],
   );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

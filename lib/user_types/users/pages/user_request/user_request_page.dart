@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserChargeRequestPage extends StatefulWidget {
   const UserChargeRequestPage({super.key});
@@ -76,6 +77,25 @@ class _UserChargeRequestPageState extends State<UserChargeRequestPage> {
           click: () => Get.back(),
           title: 'Request Port',
           actions: const [],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButton: InkWell(
+        onTap: () => insertUserRequestData(),
+        child: Container(
+          height: screenSize.height * 0.08,
+          width: screenSize.width,
+          decoration: const BoxDecoration(color: egreen),
+          alignment: Alignment.center,
+          child: Text(
+            'Request Port',
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: ewhite,
+            ),
+          ),
         ),
       ),
       body: SingleChildScrollView(

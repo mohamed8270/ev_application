@@ -19,7 +19,7 @@ class _UserBottomNavBarState extends State<UserBottomNavBar> {
 
   final screens = [
     UserHomePage(),
-    const UserProfilePage(),
+    UserProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
