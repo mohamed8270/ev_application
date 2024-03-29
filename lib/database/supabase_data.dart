@@ -23,6 +23,7 @@ class SupaBaseHelper extends GetxController {
     print('Supabase Connected');
   }
 
+  //  Station Holder API's
   Future<void> insertStationData(Map<String, dynamic> data) async {
     try {
       await supabase.from('stations').insert(data).select();
@@ -59,6 +60,39 @@ class SupaBaseHelper extends GetxController {
     try {
       await supabase.from('stations').delete().eq('id', id);
       fetchStationData();
+    } catch (e) {
+      ThemeClass().errorSnack(e);
+    }
+  }
+
+  // User Request API's processing
+  Future<void> insertRequestData(Map<String, dynamic> data) async {
+    try {
+      await supabase.from('user_charge_request').insert(data).select();
+      fetchRequestData();
+      ThemeClass().successSnack();
+    } catch (e) {
+      ThemeClass().errorSnack(e);
+    }
+  }
+
+  Future<void> fetchRequestData() async {
+    try {
+      final response = await supabase.from('user_charge_request').select();
+      if (response.isNotEmpty) {
+        stations.value = response;
+      } else {
+        ThemeClass().warningSnack();
+      }
+    } catch (e) {
+      ThemeClass().errorSnack(e);
+    }
+  }
+
+  Future<void> deleteRequestData(int id) async {
+    try {
+      await supabase.from('stations').delete().eq('id', id);
+      fetchRequestData();
     } catch (e) {
       ThemeClass().errorSnack(e);
     }

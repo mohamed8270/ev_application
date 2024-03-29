@@ -117,150 +117,153 @@ class UserSidePostDetailPage extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: screenSize.height * 0.4,
-            width: screenSize.width,
-            decoration: BoxDecoration(
-              color: egrey.withOpacity(0.2),
-            ),
-            alignment: Alignment.center,
-            child: data['latitude'] != null
-                ? FlutterMap(
-                    options: MapOptions(
-                      keepAlive: true,
-                      initialCenter: LatLng(
-                        double.parse(data['latitude']),
-                        double.parse(data['longitude']),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: screenSize.height * 0.4,
+              width: screenSize.width,
+              decoration: BoxDecoration(
+                color: egrey.withOpacity(0.2),
+              ),
+              alignment: Alignment.center,
+              child: data['latitude'] != null
+                  ? FlutterMap(
+                      options: MapOptions(
+                        keepAlive: true,
+                        initialCenter: LatLng(
+                          double.parse(data['latitude']),
+                          double.parse(data['longitude']),
+                        ),
+                        initialZoom: 10,
                       ),
-                      initialZoom: 10,
-                    ),
-                    children: [
-                      TileLayer(
-                        urlTemplate:
-                            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                        userAgentPackageName: "com.example.ev_application",
-                      ),
-                      MarkerLayer(
-                        rotate: false,
-                        markers: [
-                          Marker(
-                            rotate: false,
-                            point: LatLng(double.parse(data['latitude']),
-                                double.parse(data['longitude'])),
-                            child: SvgPicture.network(
-                              'https://www.svgrepo.com/show/474059/location.svg',
-                              height: 25,
-                              width: 25,
-                              color: egreen,
-                              theme: const SvgTheme(currentColor: egreen),
+                      children: [
+                        TileLayer(
+                          urlTemplate:
+                              "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                          userAgentPackageName: "com.example.ev_application",
+                        ),
+                        MarkerLayer(
+                          rotate: false,
+                          markers: [
+                            Marker(
+                              rotate: false,
+                              point: LatLng(double.parse(data['latitude']),
+                                  double.parse(data['longitude'])),
+                              child: SvgPicture.network(
+                                'https://www.svgrepo.com/show/474059/location.svg',
+                                height: 25,
+                                width: 25,
+                                color: egreen,
+                                theme: const SvgTheme(currentColor: egreen),
+                              ),
                             ),
+                          ],
+                        ),
+                      ],
+                    )
+                  : WebViewWidget(controller: webviewController),
+            ),
+            Padding(
+              padding: ThemeClass.padding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: screenSize.width * 0.65,
+                            child: Text(
+                              data['station_name'].toString(),
+                              overflow: TextOverflow.ellipsis,
+                              style: ThemeClass.heading11,
+                            ),
+                          ),
+                          Text(
+                            data['address'].toString(),
+                            style: ThemeClass.heading10,
+                          ),
+                          Text(
+                            data['location'].toString(),
+                            style: ThemeClass.heading10,
                           ),
                         ],
                       ),
+                      CheckUserAvailRepo(
+                        txt: '₹${data['time_based_pricing'].toString()} / hr',
+                        color: eblack.withOpacity(0.4),
+                      ),
                     ],
-                  )
-                : WebViewWidget(controller: webviewController),
-          ),
-          Padding(
-            padding: ThemeClass.padding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: screenSize.width * 0.65,
-                          child: Text(
-                            data['station_name'].toString(),
-                            overflow: TextOverflow.ellipsis,
-                            style: ThemeClass.heading11,
-                          ),
-                        ),
-                        Text(
-                          data['address'].toString(),
-                          style: ThemeClass.heading10,
-                        ),
-                        Text(
-                          data['location'].toString(),
-                          style: ThemeClass.heading10,
-                        ),
-                      ],
-                    ),
-                    CheckUserAvailRepo(
-                      txt: '₹${data['time_based_pricing'].toString()} / hr',
-                      color: eblack.withOpacity(0.4),
-                    ),
-                  ],
-                ),
-                ThemeClass.space1,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CheckUserAvailRepo(
-                      txt: data['availability'].toString(),
-                      color: checkAvailability(data['availability']),
-                    ),
-                    ThemeClass.space4,
-                    CheckUserAvailRepo(
-                      txt: 'Membership: ${data['membership'].toString()}',
-                      color: checkMembership(data['membership']),
-                    ),
-                  ],
-                ),
-                ThemeClass.space2,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '${data['type'].toString()},',
-                      style: ThemeClass.connectorParapraph,
-                    ),
-                    ThemeClass.space4,
-                    Text(
-                      data['connector'].toString(),
-                      style: ThemeClass.connectorParapraph,
-                    ),
-                  ],
-                ),
-                ThemeClass.space0,
-                Text(
-                  data['description'].toString(),
-                  style: ThemeClass.heading4,
-                ),
-                ThemeClass.space2,
-                Text(
-                  'Contact Details',
-                  style: ThemeClass.contactPragraph,
-                ),
-                ThemeClass.space0,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      data['email'].toString(),
-                      style: ThemeClass.heading10,
-                    ),
-                    ThemeClass.space5,
-                    Text(
-                      data['phone'].toString(),
-                      style: ThemeClass.heading10,
-                    ),
-                  ],
-                ),
-              ],
+                  ),
+                  ThemeClass.space1,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CheckUserAvailRepo(
+                        txt: data['availability'].toString(),
+                        color: checkAvailability(data['availability']),
+                      ),
+                      ThemeClass.space4,
+                      CheckUserAvailRepo(
+                        txt: 'Membership: ${data['membership'].toString()}',
+                        color: checkMembership(data['membership']),
+                      ),
+                    ],
+                  ),
+                  ThemeClass.space2,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${data['type'].toString()},',
+                        style: ThemeClass.connectorParapraph,
+                      ),
+                      ThemeClass.space4,
+                      Text(
+                        data['connector'].toString(),
+                        style: ThemeClass.connectorParapraph,
+                      ),
+                    ],
+                  ),
+                  ThemeClass.space0,
+                  Text(
+                    data['description'].toString(),
+                    style: ThemeClass.heading4,
+                  ),
+                  ThemeClass.space2,
+                  Text(
+                    'Contact Details',
+                    style: ThemeClass.contactPragraph,
+                  ),
+                  ThemeClass.space0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        data['email'].toString(),
+                        style: ThemeClass.heading10,
+                      ),
+                      ThemeClass.space5,
+                      Text(
+                        data['phone'].toString(),
+                        style: ThemeClass.heading10,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
