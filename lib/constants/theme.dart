@@ -117,6 +117,12 @@ class ThemeClass {
     color: eblack,
   );
 
+  static TextStyle emergencyText = GoogleFonts.poppins(
+    fontSize: 8,
+    fontWeight: FontWeight.w600,
+    color: eblack,
+  );
+
   static SizedBox space0 = const SizedBox(height: 5);
   static SizedBox space1 = const SizedBox(height: 10);
   static SizedBox space2 = const SizedBox(height: 20);
