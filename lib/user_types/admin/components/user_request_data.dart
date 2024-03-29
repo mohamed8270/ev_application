@@ -33,7 +33,7 @@ class UserResquestDataRepo extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     return Container(
-      height: screenSize.height * 0.18,
+      height: screenSize.height * 0.2,
       width: screenSize.width * 0.95,
       decoration: BoxDecoration(
         color: ewhite,
@@ -75,29 +75,23 @@ class UserResquestDataRepo extends StatelessWidget {
                       vehicleName,
                       style: ThemeClass.heading2,
                     ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: locationClick,
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: egreen.withOpacity(0.4),
-                        child: SvgPicture.network(
-                          'https://www.svgrepo.com/show/495430/location.svg',
-                          height: 18,
-                          width: 18,
-                        ),
-                      ),
-                    ),
-                    ThemeClass.space0,
                     Text(
                       emergency,
                       style: ThemeClass.heading10,
                     ),
                   ],
+                ),
+                InkWell(
+                  onTap: locationClick,
+                  child: CircleAvatar(
+                    radius: 16,
+                    backgroundColor: egreen.withOpacity(0.4),
+                    child: SvgPicture.network(
+                      'https://www.svgrepo.com/show/495430/location.svg',
+                      height: 18,
+                      width: 18,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -108,12 +102,12 @@ class UserResquestDataRepo extends StatelessWidget {
                   children: [
                     Text(
                       username,
-                      style: ThemeClass.heading10,
+                      style: ThemeClass.connectorParapraph,
                     ),
                     ThemeClass.space5,
                     Text(
                       contact,
-                      style: ThemeClass.heading10,
+                      style: ThemeClass.connectorParapraph,
                     ),
                   ],
                 ),
@@ -133,7 +127,7 @@ class UserResquestDataRepo extends StatelessWidget {
                 Text(
                   vehicleNum,
                   style: GoogleFonts.poppins(
-                    fontSize: 34,
+                    fontSize: 30,
                     fontWeight: FontWeight.w500,
                     color: egreen,
                   ),

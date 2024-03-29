@@ -64,7 +64,7 @@ class AdminProfilePage extends StatelessWidget {
             ThemeClass.space2,
             CustomButtonWidget(
               height: screenSize.height * 0.04,
-              width: screenSize.width * 0.1,
+              width: screenSize.width * 0.2,
               radius: 10,
               color: egreen,
               txt: 'Signout',

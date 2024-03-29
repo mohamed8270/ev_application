@@ -11,13 +11,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AdminHomePage extends StatelessWidget {
-  AdminHomePage({super.key});
+class AdminHomePage extends StatefulWidget {
+  const AdminHomePage({super.key});
+
+  @override
+  State<AdminHomePage> createState() => _AdminHomePageState();
+}
+
+class _AdminHomePageState extends State<AdminHomePage> {
   final supabase = Supabase.instance.client;
+
   final SupaBaseHelper supaBaseHelper = Get.put(SupaBaseHelper());
+
   @override
   Widget build(BuildContext context) {
-    // final screenSize = MediaQuery.sizeOf(context);
+    final screenSize = MediaQuery.sizeOf(context);
     final user = supabase.auth.currentUser;
     final userName = user!.userMetadata?['full_name'];
     final profileImageUrl = user.userMetadata?['avatar_url'];
@@ -87,24 +95,28 @@ class AdminHomePage extends StatelessWidget {
                   style: ThemeClass.heading2,
                 ),
                 ThemeClass.space1,
-                ListView.builder(
-                  itemCount: supaBaseHelper.requestData.length,
-                  itemBuilder: (ctx, idx) {
-                    final requestdata = supaBaseHelper.requestData[idx];
-                    return UserResquestDataRepo(
-                      id: requestdata['_id'].toString(),
-                      username: requestdata['name'].toString(),
-                      companyName: requestdata['stationname'].toString(),
-                      vehicleName: requestdata['vehicle_name'].toString(),
-                      vehicleNum: requestdata['vehicle_num'].toString(),
-                      date: requestdata['date'].toString(),
-                      time: requestdata['time'].toString(),
-                      emergency: requestdata['emergency'].toString(),
-                      contact: requestdata['contact'].toString(),
-                      locationClick: () =>
-                          Get.to(UserRequestMapView(index: idx)),
-                    );
-                  },
+                SizedBox(
+                  height: screenSize.height,
+                  width: screenSize.width,
+                  child: ListView.builder(
+                    itemCount: supaBaseHelper.requestData.length,
+                    itemBuilder: (ctx, idx) {
+                      final requestdata = supaBaseHelper.requestData[idx];
+                      return UserResquestDataRepo(
+                        id: 'ID: ${requestdata['_id'].toString()}',
+                        username: requestdata['name'].toString(),
+                        companyName: requestdata['stationname'].toString(),
+                        vehicleName: requestdata['vehicle_name'].toString(),
+                        vehicleNum: requestdata['vehicle_num'].toString(),
+                        date: requestdata['date'].toString(),
+                        time: requestdata['time'].toString(),
+                        emergency: requestdata['emergency'].toString(),
+                        contact: requestdata['contact'].toString(),
+                        locationClick: () =>
+                            Get.to(UserRequestMapView(index: idx)),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
