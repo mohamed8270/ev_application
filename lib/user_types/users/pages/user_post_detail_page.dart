@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:ev_application/constants/theme.dart';
 import 'package:ev_application/database/supabase_data.dart';
 import 'package:ev_application/interface/app_bar.dart';
@@ -142,14 +144,17 @@ class UserSidePostDetailPage extends StatelessWidget {
                         userAgentPackageName: "com.example.ev_application",
                       ),
                       MarkerLayer(
+                        rotate: false,
                         markers: [
                           Marker(
+                            rotate: false,
                             point: LatLng(double.parse(data['latitude']),
                                 double.parse(data['longitude'])),
                             child: SvgPicture.network(
                               'https://www.svgrepo.com/show/474059/location.svg',
                               height: 25,
                               width: 25,
+                              color: egreen,
                               theme: const SvgTheme(currentColor: egreen),
                             ),
                           ),
