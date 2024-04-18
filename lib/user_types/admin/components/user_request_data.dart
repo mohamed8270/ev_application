@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:ev_application/constants/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -85,11 +87,12 @@ class UserResquestDataRepo extends StatelessWidget {
                   onTap: locationClick,
                   child: CircleAvatar(
                     radius: 16,
-                    backgroundColor: egreen.withOpacity(0.4),
+                    backgroundColor: egreen.withOpacity(0.06),
                     child: SvgPicture.network(
                       'https://www.svgrepo.com/show/495430/location.svg',
                       height: 18,
                       width: 18,
+                      color: egreen,
                     ),
                   ),
                 ),
